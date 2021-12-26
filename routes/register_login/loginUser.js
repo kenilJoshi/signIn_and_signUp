@@ -1,5 +1,5 @@
 const express = require("express");
-const { User } = require("../app/models/userModel");
+const { User } = require("../../app/models/userModel");
 const loginRoutes = new express.Router();
 
 loginRoutes.post("/api/v1/login", async (req, res) => {

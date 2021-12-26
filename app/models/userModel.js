@@ -20,6 +20,12 @@ const userSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    likedPost: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "posts",
+      },
+    ],
     tokens: [
       {
         token: {
@@ -38,6 +44,25 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+userSchema.virtual("posts", {
+  ref: "posts",
+  localField: "_id",
+  foreignField: "owner",
+});
+userSchema.virtual("comment", {
+  ref: "comment",
+  localField: "_id",
+  foreignField: "owner",
+});
+
+userSchema.methods.toJSON = function () {
+  const user = this;
+  const userObject = user.toObject();
+  delete userObject.password;
+  delete userObject.tokens;
+  delete userObject.forgotPasswordToken;
+  return userObject;
+};
 userSchema.methods.tokenCreation = async function () {
   const user = this;
   const token = jwt.sign({ _id: user._id.toString() }, "thismyfirsttoken", {
