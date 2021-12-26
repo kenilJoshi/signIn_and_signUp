@@ -4,7 +4,7 @@ const { User } = require("../../app/models/userModel");
 const { auth } = require("../../app/middleware/auth");
 const registerRoutes = new express.Router();
 
-registerRoutes.get("/", auth, async (req, res) => {
+registerRoutes.get("/", async (req, res) => {
   res.send("home page for signin and singup");
 });
 registerRoutes.get("/api/v1/register", (req, res) => {
