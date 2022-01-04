@@ -27,7 +27,7 @@ readPostRouter.get("/api/v1/myPosts", auth, async (req, res) => {
     res.status(404).send(e);
   }
 });
-readPostRouter.get("/api/v1/allPosts", async (req, res) => {
+readPostRouter.get("/api/v1/allPost", async (req, res) => {
   try {
     const posts = await Post.find({});
     if (!posts) {
